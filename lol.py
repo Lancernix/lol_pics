@@ -73,9 +73,10 @@ def get_one_champion(browser, item):
         yield pic_list
 
 
-def save_pics(pics_list):
+def save_pics(path, pics_list):
     """
     保存图片到文件夹中
+    :param path: 文件夹路径
     :param pics_list: 图片url列表
     :return: NONE
     """
@@ -113,7 +114,7 @@ def get_one_pic_content(pic_url):
     return r.content
 
 
-if __name__ == '__main__':
+def main():
     start_time = time.time()
     # 创建文件夹
     path = 'lol_skin_pics'
@@ -129,10 +130,14 @@ if __name__ == '__main__':
     champ_list = get_all_url(browser, nav_url)
     for item in champ_list:
         pics_list = get_one_champion(browser, item)
-        save_pics(pics_list)
+        save_pics(path, pics_list)
     # 关闭浏览器
     browser.quit()
     finish_time = time.time()
     total_time = finish_time - start_time
     print('所有图片已保存！乌拉～～')
     print('总用时：' + str(total_time))
+
+
+if __name__ == '__main__':
+    main()
